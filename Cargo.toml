@@ -3,6 +3,7 @@ name = "simple-os"
 version = "0.1.0"
 edition = "2024"
 
+
 [profile.dev]
 panic = "abort"
 
@@ -14,4 +15,8 @@ name = "simple-os"
 test = false
 bench = false
 
+[package.metadata.bootimage]
+run-command = ["F:\\qemu\\qemu-system-x86_64", "-drive", "format=raw,file={}"]
+
 [dependencies]
+bootloader = "0.9"
