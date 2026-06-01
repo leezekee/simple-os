@@ -15,19 +15,18 @@ pub extern "C" fn _start() -> ! {
 
     init();
 
-    x86_64::instructions::interrupts::int3();
-
     #[cfg(test)]
     test_main();
 
-    loop {}
+    simple_os::hlt_loop()
 }
 
 #[cfg(not(test))]
 #[panic_handler]
 fn panic(_info: &PanicInfo) -> ! {
     println!("{}", _info);
-    loop {}
+
+    simple_os::hlt_loop()
 }
 
 #[cfg(test)]
@@ -35,5 +34,3 @@ fn panic(_info: &PanicInfo) -> ! {
 fn panic(info: &PanicInfo) -> ! {
     simple_os::test_panic_handler(info)
 }
-
-
